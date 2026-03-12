@@ -21,7 +21,7 @@ const item = {
 
 export function Hero() {
   return (
-    <section className="flex min-h-[100dvh] items-center justify-center px-6">
+    <section className="flex min-h-[100dvh] items-center justify-center px-6 pt-24 pb-12 md:pt-0 md:pb-0">
       <motion.div
         variants={container}
         initial="hidden"
@@ -43,9 +43,7 @@ export function Hero() {
             <span
               key={i}
               className={
-                word === "Mahith"
-                  ? "text-ktm-600 dark:text-ktm-400"
-                  : ""
+                word === "Mahith" ? "text-ktm-600 dark:text-ktm-400" : ""
               }
             >
               {word}{" "}
@@ -76,7 +74,7 @@ export function Hero() {
             rel="noreferrer"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "h-11 gap-2 px-6 text-base"
+              "h-11 gap-2 px-6 text-base",
             )}
           >
             <FileText className="h-5 w-5" />
@@ -86,7 +84,7 @@ export function Hero() {
             href="#contact"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "h-11 gap-2 px-6 text-base"
+              "h-11 gap-2 px-6 text-base",
             )}
           >
             <ArrowDown className="h-5 w-5" />
