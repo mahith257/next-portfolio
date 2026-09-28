@@ -16,11 +16,29 @@ import { navLinks } from "@/lib/data";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("#about");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.href))
+      .filter((section): section is HTMLElement => section instanceof HTMLElement);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(`#${visible.target.id}`);
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: [0.05, 0.2, 0.5] },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -34,9 +52,11 @@ export function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6 lg:px-0">
-        <a href="#" className="text-lg font-bold tracking-tight">
-          <span className="text-ktm-500 dark:text-ktm-400">@</span>
+      <nav className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-6 lg:px-10">
+        <a href="#" className="group flex items-center gap-2 font-mono text-sm font-medium tracking-[-0.04em]">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full border border-ktm-500/50 text-base text-ktm-600 transition-transform duration-300 group-hover:rotate-90 dark:text-ktm-400">
+            @
+          </span>
           <span>mahith</span>
         </a>
 
@@ -45,7 +65,8 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              aria-current={activeSection === link.href ? "page" : undefined}
+              className={`rounded-full px-3 py-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.12em] transition-colors ${activeSection === link.href ? "text-ktm-600 dark:text-ktm-400" : "text-muted-foreground hover:text-ktm-600 dark:hover:text-ktm-400"}`}
             >
               {link.label}
             </a>

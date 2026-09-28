@@ -125,6 +125,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    min-height: 100dvh;
+    overflow-x: hidden;
   }
   html {
     @apply scroll-smooth font-sans;
@@ -134,5 +136,221 @@
   [role="tab"],
   [data-slot="button"] {
     @apply cursor-pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.signal-grid {
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px);
+  background-position: center var(--scroll-offset), center var(--scroll-offset);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 24%, black 10%, transparent 82%);
+}
+
+.signal-spotlight {
+  background:
+    radial-gradient(34rem circle at var(--pointer-x) var(--pointer-y), color-mix(in oklch, var(--color-ktm-500) 15%, transparent), transparent 54%),
+    radial-gradient(42rem circle at 52% calc(5% + var(--scroll-offset)), color-mix(in oklch, var(--color-ktm-500) 12%, transparent), transparent 62%);
+  transition: background 180ms ease-out;
+}
+
+.signal-orbit {
+  position: absolute;
+  border: 1px solid color-mix(in oklch, var(--color-ktm-500) 18%, transparent);
+  border-radius: 9999px;
+  filter: blur(0.2px);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.signal-orbit-one {
+  left: 55%;
+  top: 35%;
+  width: min(78vw, 62rem);
+  aspect-ratio: 1.8;
+  rotate: -21deg;
+}
+
+.signal-orbit-two {
+  left: 38%;
+  top: 20%;
+  width: min(56vw, 46rem);
+  aspect-ratio: 1.7;
+  rotate: 42deg;
+  opacity: 0.55;
+}
+
+.signal-line {
+  fill: none;
+  stroke: color-mix(in oklch, var(--color-ktm-500) 42%, transparent);
+  stroke-dasharray: 1.1 1.8;
+  stroke-width: 0.12;
+  vector-effect: non-scaling-stroke;
+  animation: signal-flow 11s linear infinite;
+}
+
+.signal-line-muted {
+  opacity: 0.54;
+  animation-direction: reverse;
+  animation-duration: 15s;
+}
+
+.signal-node {
+  position: absolute;
+  border-radius: 9999px;
+  background: var(--color-ktm-500);
+  box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-ktm-500) 9%, transparent), 0 0 18px color-mix(in oklch, var(--color-ktm-500) 60%, transparent);
+  transform: translate(-50%, -50%);
+  animation: signal-node-pulse 4s ease-in-out infinite;
+}
+
+.signal-button {
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-ktm-500) 30%, transparent), 0 12px 32px color-mix(in oklch, var(--color-ktm-500) 18%, transparent);
+}
+
+.signal-button:hover {
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-ktm-500) 60%, transparent), 0 16px 38px color-mix(in oklch, var(--color-ktm-500) 28%, transparent);
+}
+
+.signal-cursor {
+  position: fixed;
+  z-index: 100;
+  left: -1.45rem;
+  top: -1.45rem;
+  display: none;
+  height: 2.9rem;
+  width: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklch, var(--color-ktm-500) 55%, transparent);
+  border-radius: 9999px;
+  background: color-mix(in oklch, var(--background) 70%, transparent);
+  color: var(--foreground);
+  opacity: 0;
+  pointer-events: none;
+  transition: width 180ms ease, height 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+
+.signal-cursor span {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .signal-cursor {
+    display: flex;
+    opacity: 0.65;
+  }
+
+  .signal-cursor-active {
+    height: 4.25rem;
+    width: 4.25rem;
+    background: var(--color-ktm-500);
+    color: white;
+    opacity: 1;
+  }
+}
+
+.constellation-lines path {
+  fill: none;
+  stroke: color-mix(in oklch, var(--color-ktm-500) 48%, transparent);
+  stroke-dasharray: 1.2 1.8;
+  stroke-width: 0.18;
+  vector-effect: non-scaling-stroke;
+  animation: signal-flow 14s linear infinite;
+}
+
+.constellation-lines .constellation-line-muted {
+  opacity: 0.45;
+  animation-direction: reverse;
+}
+
+.constellation-node {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid color-mix(in oklch, var(--color-ktm-500) 48%, transparent);
+  border-radius: 9999px;
+  background: color-mix(in oklch, var(--background) 78%, transparent);
+  box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-ktm-500) 6%, transparent), 0 8px 24px color-mix(in oklch, var(--color-ktm-500) 10%, transparent);
+  color: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.constellation-node-small {
+  height: 2.9rem;
+  min-width: 2.9rem;
+  padding-inline: 0.75rem;
+}
+
+.constellation-node-medium {
+  height: 4rem;
+  min-width: 4rem;
+  padding-inline: 1rem;
+}
+
+.constellation-node-large {
+  height: 5.25rem;
+  min-width: 5.25rem;
+  padding-inline: 1rem;
+}
+
+@media (max-width: 420px) {
+  .constellation-node {
+    font-size: 0.52rem;
+  }
+
+  .constellation-node-small {
+    height: 2.35rem;
+    min-width: 2.35rem;
+    padding-inline: 0.5rem;
+  }
+
+  .constellation-node-medium {
+    height: 3.1rem;
+    min-width: 3.1rem;
+    padding-inline: 0.65rem;
+  }
+
+  .constellation-node-large {
+    height: 4.1rem;
+    min-width: 4.1rem;
+    padding-inline: 0.65rem;
+  }
+}
+
+@keyframes signal-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@keyframes signal-node-pulse {
+  0%,
+  100% {
+    opacity: 0.42;
+    scale: 0.8;
+  }
+  50% {
+    opacity: 1;
+    scale: 1.18;
   }
 }

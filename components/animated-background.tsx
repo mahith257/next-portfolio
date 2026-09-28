@@ -2,55 +2,77 @@
 
 import { useEffect, useState } from "react";
 
+type Pointer = { x: number; y: number };
+
+const nodes = [
+  { x: 10, y: 18, size: 4, delay: "0s" },
+  { x: 26, y: 36, size: 6, delay: "-1.2s" },
+  { x: 45, y: 14, size: 4, delay: "-2.4s" },
+  { x: 61, y: 44, size: 5, delay: "-0.5s" },
+  { x: 81, y: 21, size: 4, delay: "-3s" },
+  { x: 89, y: 63, size: 6, delay: "-1.8s" },
+  { x: 35, y: 78, size: 4, delay: "-2s" },
+  { x: 13, y: 71, size: 5, delay: "-0.8s" },
+];
+
 export function AnimatedBackground() {
+  const [pointer, setPointer] = useState<Pointer>({ x: 50, y: 28 });
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const updatePointer = (event: PointerEvent) => {
+      setPointer({
+        x: (event.clientX / window.innerWidth) * 100,
+        y: (event.clientY / window.innerHeight) * 100,
+      });
+    };
+    const updateScroll = () => setScrollY(window.scrollY);
+
+    window.addEventListener("pointermove", updatePointer, { passive: true });
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", updatePointer);
+      window.removeEventListener("scroll", updateScroll);
+    };
   }, []);
 
-  const spotlightY = scrollY * 0.3;
-
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* Grid lines */}
-      <div
-        className="absolute inset-0 opacity-[0.08] dark:opacity-[0.15]"
-        style={{
-          backgroundImage: `linear-gradient(var(--foreground) 1px, transparent 1px),
-                            linear-gradient(90deg, var(--foreground) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background"
+      style={
+        {
+          "--pointer-x": `${pointer.x}%`,
+          "--pointer-y": `${pointer.y}%`,
+          "--scroll-offset": `${Math.min(scrollY * 0.08, 140)}px`,
+        } as React.CSSProperties
+      }
+    >
+      <div className="signal-grid absolute inset-0" />
+      <div className="signal-spotlight absolute inset-0" />
+      <div className="signal-orbit signal-orbit-one" />
+      <div className="signal-orbit signal-orbit-two" />
 
-      {/* Orange spotlight that follows scroll */}
-      <div
-        className="absolute left-1/2 h-[600px] w-[800px] -translate-x-1/2 rounded-full transition-transform duration-700 ease-out"
-        style={{
-          transform: `translate(-50%, ${spotlightY}px)`,
-          background:
-            "radial-gradient(ellipse at center, var(--color-ktm-500) 0%, transparent 70%)",
-          opacity: 0.08,
-          filter: "blur(80px)",
-        }}
-      />
+      <svg className="absolute inset-0 h-full w-full opacity-70" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <path className="signal-line" d="M10 18 L26 36 L45 14 L61 44 L81 21" />
+        <path className="signal-line signal-line-muted" d="M13 71 L35 78 L61 44 L89 63" />
+        <path className="signal-line signal-line-muted" d="M26 36 L13 71" />
+      </svg>
 
-      {/* Secondary smaller spotlight offset */}
-      <div
-        className="absolute right-0 h-[400px] w-[400px] rounded-full transition-transform duration-1000 ease-out"
-        style={{
-          transform: `translateY(${spotlightY * 1.5 + 300}px)`,
-          background:
-            "radial-gradient(ellipse at center, var(--color-ktm-400) 0%, transparent 70%)",
-          opacity: 0.06,
-          filter: "blur(60px)",
-        }}
-      />
-
-      {/* Edge fade so grid doesn't end abruptly */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_40%,var(--background)_100%)]" />
+      {nodes.map((node) => (
+        <span
+          key={`${node.x}-${node.y}`}
+          className="signal-node"
+          style={{
+            left: `${node.x}%`,
+            top: `${node.y}%`,
+            width: node.size,
+            height: node.size,
+            animationDelay: node.delay,
+          }}
+        />
+      ))}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_72%_68%_at_50%_35%,transparent_30%,var(--background)_100%)]" />
     </div>
   );
 }

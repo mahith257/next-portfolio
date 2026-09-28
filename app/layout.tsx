@@ -14,10 +14,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sai Mahith Reddy Bekkem | Senior Frontend Engineer",
+  title: "Sai Mahith Reddy Bekkem | Senior Full Stack Engineer",
   description:
-    "Senior Frontend Engineer with 5 years of experience architecting and scaling React and Next.js applications. Expertise in performance optimization, component architecture, and data visualization.",
+    "Senior Full Stack Engineer with 5 years of experience architecting and scaling React and Next.js applications, from performant interfaces to the APIs and data layers behind them.",
   keywords: [
+    "Full Stack Engineer",
     "Frontend Engineer",
     "React",
     "Next.js",
@@ -28,17 +29,17 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Sai Mahith Reddy Bekkem" }],
   openGraph: {
-    title: "Sai Mahith Reddy Bekkem | Senior Frontend Engineer",
+    title: "Sai Mahith Reddy Bekkem | Senior Full Stack Engineer",
     description:
-      "Senior Frontend Engineer with 5 years of experience architecting and scaling React and Next.js applications.",
+      "Senior Full Stack Engineer with 5 years of experience architecting and scaling React and Next.js applications, from performant interfaces to the APIs and data layers behind them.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sai Mahith Reddy Bekkem | Senior Frontend Engineer",
+    title: "Sai Mahith Reddy Bekkem | Senior Full Stack Engineer",
     description:
-      "Senior Frontend Engineer with 5 years of experience architecting and scaling React and Next.js applications.",
+      "Senior Full Stack Engineer with 5 years of experience architecting and scaling React and Next.js applications, from performant interfaces to the APIs and data layers behind them.",
   },
   robots: {
     index: true,
