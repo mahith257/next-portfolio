@@ -25,7 +25,7 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
-      className="h-9 w-9 hover:text-ktm-500 dark:hover:text-ktm-400"
+      className="h-9 w-9 hover:text-acid-500 dark:hover:text-acid-400"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
       {resolvedTheme === "dark" ? (

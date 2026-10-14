@@ -3,6 +3,8 @@ export interface Experience {
   role: string;
   period: string;
   location: string;
+  /** Short label for the kind of work, shown beside the location. */
+  focus: string;
   impact: string;
   bullets: string[];
 }
@@ -26,7 +28,9 @@ export const personalInfo = {
   name: "Sai Mahith Reddy Bekkem",
   shortName: "Mahith",
   title: "Senior Full Stack Engineer",
-  bio: "Senior Frontend Engineer with 5 years of experience architecting and scaling React and Next.js applications. Expertise in performance optimization, component architecture, data visualization, cross-functional collaboration, and mentoring peers through code reviews.",
+  /** The one-line positioning reused by the hero eyebrow and the bio. */
+  positioning: "Full-stack engineer · Frontend-first",
+  bio: "Full-stack engineer, frontend-first, with 5+ years of experience architecting and scaling React and Next.js applications and the APIs and data layers behind them. Expertise in performance optimization, component architecture, data visualization, cross-functional collaboration, and mentoring peers through code reviews.",
   email: "mahith.reddy.sai@gmail.com",
   phone: "+91 7989910999",
   github: "https://github.com/mahith257",
@@ -82,6 +86,7 @@ export const experiences: Experience[] = [
     role: "SDE 2",
     period: "Apr 2025 – Present",
     location: "Bangalore, Karnataka",
+    focus: "Product & platform UI",
     impact: "5+ product and admin tools shaped from the interface layer outward.",
     bullets: [
       "Spearheaded UI development for 5+ customer-facing and internal admin tools, architecting a web application from scratch with secure authentication, Role-Based Access Control, and CMS features, resulting in enhanced operational efficiency and SEO performance.",
@@ -95,6 +100,7 @@ export const experiences: Experience[] = [
     role: "Software Engineer",
     period: "Oct 2022 – Mar 2025",
     location: "Bangalore, Karnataka",
+    focus: "Data-driven product engineering",
     impact: "60% longer average sessions through resilient data experiences.",
     bullets: [
       "Engineered efficient API data management using GraphQL + Apollo Client and REST + React Query, implementing intelligent caching mechanisms to increase average user session duration by 60%.",
@@ -107,6 +113,7 @@ export const experiences: Experience[] = [
     role: "Software Engineer",
     period: "Jul 2021 – Sep 2022",
     location: "",
+    focus: "Frontend engineering",
     impact: "A reusable React foundation that increased engagement by 20%.",
     bullets: [
       "Developed high-performance React applications optimizing rendering and responsiveness, resulting in a 20% increase in user engagement across core products.",
@@ -118,6 +125,7 @@ export const experiences: Experience[] = [
     role: "Software Engineer Intern",
     period: "Jul 2020 – Dec 2020",
     location: "",
+    focus: "Computer vision data",
     impact: "1,000+ road images prepared for lane-detection model training.",
     bullets: [
       "Processed 1000+ road images for lane detection datasets using Python, OpenCV, and NumPy, directly supporting model training pipelines.",
@@ -128,6 +136,7 @@ export const experiences: Experience[] = [
     role: "Intern",
     period: "Jun 2019 – Aug 2019",
     location: "",
+    focus: "Internal web portal",
     impact: "An employee suggestion portal made practical for an internal audience.",
     bullets: [
       "Developed an online portal for Srujani, an internal suggestion system for the employees of RSP.",

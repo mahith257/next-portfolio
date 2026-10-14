@@ -23,7 +23,7 @@ export function Contact() {
   return (
     <section id="contact" className="py-28 px-6 lg:px-10">
       <div className="mx-auto max-w-2xl text-center">
-        <SectionHeading index="04 / CONTACT">Send a signal.</SectionHeading>
+        <SectionHeading index="04 / CONTACT" align="center">Send a signal.</SectionHeading>
         <motion.div
           className="mt-10 space-y-8"
           initial={{ opacity: 0, y: 20 }}
@@ -37,18 +37,23 @@ export function Contact() {
           </p>
 
           <div className="flex flex-col items-center gap-3">
-            <div className="flex items-center gap-2 text-base text-muted-foreground">
-              <Mail className="h-5 w-5" />
+            <div className="flex min-w-0 max-w-full items-center gap-2 text-base text-muted-foreground">
+              <Mail className="h-5 w-5 shrink-0" />
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="transition-colors hover:text-foreground"
+                className="break-all transition-colors hover:text-foreground"
               >
                 {personalInfo.email}
               </a>
             </div>
             <div className="flex items-center gap-2 text-base text-muted-foreground">
               <Phone className="h-5 w-5" />
-              <span>{personalInfo.phone}</span>
+              <a
+                href={`tel:${personalInfo.phone.replace(/\s+/g, "")}`}
+                className="transition-colors hover:text-foreground"
+              >
+                {personalInfo.phone}
+              </a>
             </div>
           </div>
 
@@ -63,7 +68,7 @@ export function Contact() {
             style={{ x: springX, y: springY }}
             className={cn(
               buttonVariants({ size: "lg" }),
-              "signal-button h-12 gap-2 rounded-full px-6 text-base"
+              "paper-button h-12 gap-2 rounded-full px-6 text-base"
             )}
           >
             <Mail className="h-5 w-5" />
@@ -78,7 +83,7 @@ export function Contact() {
               aria-label="GitHub"
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon-lg" }),
-                "text-ktm-600 hover:text-ktm-500 dark:text-ktm-400 dark:hover:text-ktm-400/80"
+                "text-acid-600 hover:text-acid-500 dark:text-acid-400 dark:hover:text-acid-400/80"
               )}
             >
               <Github className="h-6 w-6" />
@@ -90,7 +95,7 @@ export function Contact() {
               aria-label="LinkedIn"
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon-lg" }),
-                "text-ktm-600 hover:text-ktm-500 dark:text-ktm-400 dark:hover:text-ktm-400/80"
+                "text-acid-600 hover:text-acid-500 dark:text-acid-400 dark:hover:text-acid-400/80"
               )}
             >
               <Linkedin className="h-6 w-6" />

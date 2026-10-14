@@ -7,8 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -45,78 +46,93 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --color-ktm-400: oklch(0.75 0.183 55);
-  --color-ktm-500: oklch(0.705 0.213 47.604);
-  --color-ktm-600: oklch(0.646 0.222 41.116);
+  /* The accent scale resolves per mode: @theme inline keeps the var() so
+     .dark can re-point the whole scale without regenerating utilities. */
+  --color-acid-400: var(--acid-400);
+  --color-acid-500: var(--acid-500);
+  --color-acid-600: var(--acid-600);
 }
 
+/* Graphite & acid lime — light mode: cool bone stock, graphite ink. The lime
+   stays dark enough here to read as a graphic (marks, spines, chips) while the
+   600 step carries small text at full contrast. */
 :root {
-  --background: oklch(0.985 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  color-scheme: light;
+  --acid-400: oklch(0.7 0.155 140);
+  --acid-500: oklch(0.6 0.15 140);
+  --acid-600: oklch(0.47 0.115 142);
+  --background: oklch(0.965 0.004 250);
+  --foreground: oklch(0.21 0.012 258);
+  --card: oklch(0.99 0.003 250);
+  --card-foreground: oklch(0.21 0.012 258);
+  --popover: oklch(0.99 0.003 250);
+  --popover-foreground: oklch(0.21 0.012 258);
+  --primary: oklch(0.23 0.012 258);
+  --primary-foreground: oklch(0.965 0.004 250);
+  --secondary: oklch(0.925 0.006 250);
+  --secondary-foreground: oklch(0.23 0.012 258);
+  --muted: oklch(0.925 0.006 250);
+  --muted-foreground: oklch(0.5 0.018 258);
+  --accent: oklch(0.93 0.014 140);
+  --accent-foreground: oklch(0.23 0.012 258);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: oklch(0.88 0.006 250);
+  --input: oklch(0.88 0.006 250);
+  --ring: oklch(0.62 0.14 142);
+  --chart-1: oklch(0.47 0.115 142);
+  --chart-2: oklch(0.21 0.012 258);
+  --chart-3: oklch(0.66 0.16 140);
+  --chart-4: oklch(0.55 0.05 250);
+  --chart-5: oklch(0.8 0.14 140);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.965 0.004 250);
+  --sidebar-foreground: oklch(0.21 0.012 258);
+  --sidebar-primary: oklch(0.47 0.115 142);
+  --sidebar-primary-foreground: oklch(0.965 0.004 250);
+  --sidebar-accent: oklch(0.925 0.006 250);
+  --sidebar-accent-foreground: oklch(0.23 0.012 258);
+  --sidebar-border: oklch(0.88 0.006 250);
+  --sidebar-ring: oklch(0.62 0.14 142);
 }
 
+/* Graphite dark (the default): cool near-black stock, bone type, neon lime
+   signals. Never pure black or pure white, so surfaces keep a material edge. */
 .dark {
-  --background: oklch(0.1 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.14 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.14 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.92 0 0);
-  --primary-foreground: oklch(0.14 0 0);
-  --secondary: oklch(0.19 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.19 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.19 0 0);
-  --accent-foreground: oklch(0.95 0 0);
+  color-scheme: dark;
+  --acid-400: oklch(0.9 0.185 132);
+  --acid-500: oklch(0.86 0.19 132);
+  --acid-600: oklch(0.78 0.18 133);
+  --background: oklch(0.17 0.006 258);
+  --foreground: oklch(0.93 0.008 95);
+  --card: oklch(0.215 0.007 258);
+  --card-foreground: oklch(0.93 0.008 95);
+  --popover: oklch(0.215 0.007 258);
+  --popover-foreground: oklch(0.93 0.008 95);
+  --primary: oklch(0.9 0.185 132);
+  --primary-foreground: oklch(0.17 0.006 258);
+  --secondary: oklch(0.26 0.008 258);
+  --secondary-foreground: oklch(0.93 0.008 95);
+  --muted: oklch(0.26 0.008 258);
+  --muted-foreground: oklch(0.72 0.012 255);
+  --accent: oklch(0.28 0.016 140);
+  --accent-foreground: oklch(0.93 0.008 95);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.17 0.01 260);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.22 0.01 260);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --border: oklch(0.9 0.03 132 / 15%);
+  --input: oklch(0.9 0.03 132 / 20%);
+  --ring: oklch(0.9 0.185 132);
+  --chart-1: oklch(0.9 0.185 132);
+  --chart-2: oklch(0.93 0.008 95);
+  --chart-3: oklch(0.78 0.17 134);
+  --chart-4: oklch(0.7 0.06 250);
+  --chart-5: oklch(0.85 0.14 138);
+  --sidebar: oklch(0.215 0.007 258);
+  --sidebar-foreground: oklch(0.93 0.008 95);
+  --sidebar-primary: oklch(0.9 0.185 132);
+  --sidebar-primary-foreground: oklch(0.17 0.006 258);
+  --sidebar-accent: oklch(0.28 0.016 140);
+  --sidebar-accent-foreground: oklch(0.93 0.008 95);
+  --sidebar-border: oklch(0.9 0.03 132 / 15%);
+  --sidebar-ring: oklch(0.9 0.185 132);
 }
 
 @layer base {
@@ -147,210 +163,150 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
+
+  /* The chart's whole point is its morph, so it opts out explicitly rather than
+     inheriting the general rule, which only covers animations, not transitions. */
+  .career-chart * {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
 }
 
-.signal-grid {
-  background-image:
-    linear-gradient(color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px);
-  background-position: center var(--scroll-offset), center var(--scroll-offset);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 85% 65% at 50% 24%, black 10%, transparent 82%);
+/* ---------------------------------------------------------------- buttons */
+
+/* Letterpress rather than glow: a hard rule under the button instead of a halo. */
+.paper-button {
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--foreground) 16%, transparent);
 }
 
-.signal-spotlight {
-  background:
-    radial-gradient(34rem circle at var(--pointer-x) var(--pointer-y), color-mix(in oklch, var(--color-ktm-500) 15%, transparent), transparent 54%),
-    radial-gradient(42rem circle at 52% calc(5% + var(--scroll-offset)), color-mix(in oklch, var(--color-ktm-500) 12%, transparent), transparent 62%);
-  transition: background 180ms ease-out;
+.paper-button:hover {
+  box-shadow: 0 3px 0 0 color-mix(in oklch, var(--color-acid-500) 55%, transparent);
 }
 
-.signal-orbit {
-  position: absolute;
-  border: 1px solid color-mix(in oklch, var(--color-ktm-500) 18%, transparent);
-  border-radius: 9999px;
-  filter: blur(0.2px);
-  transform: translate3d(-50%, -50%, 0);
-}
+/* ----------------------------------------------------------------- cursor */
 
-.signal-orbit-one {
-  left: 55%;
-  top: 35%;
-  width: min(78vw, 62rem);
-  aspect-ratio: 1.8;
-  rotate: -21deg;
-}
-
-.signal-orbit-two {
-  left: 38%;
-  top: 20%;
-  width: min(56vw, 46rem);
-  aspect-ratio: 1.7;
-  rotate: 42deg;
-  opacity: 0.55;
-}
-
-.signal-line {
-  fill: none;
-  stroke: color-mix(in oklch, var(--color-ktm-500) 42%, transparent);
-  stroke-dasharray: 1.1 1.8;
-  stroke-width: 0.12;
-  vector-effect: non-scaling-stroke;
-  animation: signal-flow 11s linear infinite;
-}
-
-.signal-line-muted {
-  opacity: 0.54;
-  animation-direction: reverse;
-  animation-duration: 15s;
-}
-
-.signal-node {
-  position: absolute;
-  border-radius: 9999px;
-  background: var(--color-ktm-500);
-  box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-ktm-500) 9%, transparent), 0 0 18px color-mix(in oklch, var(--color-ktm-500) 60%, transparent);
-  transform: translate(-50%, -50%);
-  animation: signal-node-pulse 4s ease-in-out infinite;
-}
-
-.signal-button {
-  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-ktm-500) 30%, transparent), 0 12px 32px color-mix(in oklch, var(--color-ktm-500) 18%, transparent);
-}
-
-.signal-button:hover {
-  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-ktm-500) 60%, transparent), 0 16px 38px color-mix(in oklch, var(--color-ktm-500) 28%, transparent);
-}
-
-.signal-cursor {
+.ink-cursor {
   position: fixed;
   z-index: 100;
-  left: -1.45rem;
-  top: -1.45rem;
+  left: -1.4rem;
+  top: -1.4rem;
   display: none;
-  height: 2.9rem;
-  width: 2.9rem;
+  height: 2.8rem;
+  width: 2.8rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid color-mix(in oklch, var(--color-ktm-500) 55%, transparent);
+  border: 1px solid color-mix(in oklch, var(--foreground) 50%, transparent);
   border-radius: 9999px;
-  background: color-mix(in oklch, var(--background) 70%, transparent);
+  background: transparent;
   color: var(--foreground);
   opacity: 0;
   pointer-events: none;
-  transition: width 180ms ease, height 180ms ease, background 180ms ease, opacity 180ms ease;
+  transition:
+    width 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    opacity 200ms ease;
 }
 
-.signal-cursor span {
+.ink-cursor span {
   font-family: var(--font-mono);
   font-size: 0.56rem;
   letter-spacing: 0.12em;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .signal-cursor {
+  .ink-cursor {
     display: flex;
-    opacity: 0.65;
+    opacity: 0.55;
   }
 
-  .signal-cursor-active {
-    height: 4.25rem;
-    width: 4.25rem;
-    background: var(--color-ktm-500);
-    color: white;
+  .ink-cursor-active {
+    height: 3.75rem;
+    width: 3.75rem;
+    background: var(--color-acid-500);
+    border-color: var(--color-acid-500);
+    color: oklch(0.17 0.006 258);
     opacity: 1;
   }
+
+  /* Until the first mouse move, and whenever the pointer leaves the window. */
+  .ink-cursor.ink-cursor-hidden {
+    opacity: 0;
+  }
 }
 
-.constellation-lines path {
-  fill: none;
-  stroke: color-mix(in oklch, var(--color-ktm-500) 48%, transparent);
-  stroke-dasharray: 1.2 1.8;
-  stroke-width: 0.18;
-  vector-effect: non-scaling-stroke;
-  animation: signal-flow 14s linear infinite;
+/* ----------------------------------------------------------- career chart */
+
+/*
+ * One chart, three readings. Every mark and label is absolutely positioned in
+ * container percentages, so switching `view` only rewrites left/top and the CSS
+ * transition performs the morph — no measurement, no resize handling, and the
+ * geometry stays correct at any rail width.
+ */
+.career-chart {
+  position: relative;
+  width: 100%;
+  /* Fills whatever box it is given rather than locking an aspect ratio, so the
+     sticky rail can use the full viewport height without letterboxing. */
+  flex: 1 1 0%;
+  min-height: 16rem;
 }
 
-.constellation-lines .constellation-line-muted {
-  opacity: 0.45;
-  animation-direction: reverse;
-}
-
-.constellation-node {
+.career-chart-mark {
   position: absolute;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-  border: 1px solid color-mix(in oklch, var(--color-ktm-500) 48%, transparent);
+  width: 3.4%;
+  aspect-ratio: 1;
   border-radius: 9999px;
-  background: color-mix(in oklch, var(--background) 78%, transparent);
-  box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-ktm-500) 6%, transparent), 0 8px 24px color-mix(in oklch, var(--color-ktm-500) 10%, transparent);
-  color: var(--foreground);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  background: var(--mark-bg, var(--color-acid-500));
+  transform: translate(-50%, -50%) scale(var(--mark-scale, 1));
+  opacity: var(--mark-opacity, 1);
+  /* Only left/top take the per-row --stagger delay: transform and opacity must
+     answer hover immediately, or emphasis feels laggy behind the morph. */
+  transition:
+    left 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    top 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease,
+    background-color 0.22s ease;
 }
 
-.constellation-node-small {
-  height: 2.9rem;
-  min-width: 2.9rem;
-  padding-inline: 0.75rem;
+/* The row doubles as the pointer and keyboard target, so it owns the band. */
+.career-chart-row {
+  position: absolute;
+  display: block;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  transition:
+    left 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    top 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    width 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    height 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    opacity 0.3s ease,
+    background-color 0.2s ease;
 }
 
-.constellation-node-medium {
-  height: 4rem;
-  min-width: 4rem;
-  padding-inline: 1rem;
+.career-chart-row:hover,
+.career-chart-row:focus-visible {
+  background-color: color-mix(in oklch, var(--foreground) 5%, transparent);
+  outline: none;
 }
 
-.constellation-node-large {
-  height: 5.25rem;
-  min-width: 5.25rem;
-  padding-inline: 1rem;
+.career-chart-guide {
+  position: absolute;
+  height: 1px;
+  background: color-mix(in oklch, var(--foreground) 22%, transparent);
+  transition:
+    left 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    top 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+    opacity 0.3s ease;
 }
 
-@media (max-width: 420px) {
-  .constellation-node {
-    font-size: 0.52rem;
-  }
-
-  .constellation-node-small {
-    height: 2.35rem;
-    min-width: 2.35rem;
-    padding-inline: 0.5rem;
-  }
-
-  .constellation-node-medium {
-    height: 3.1rem;
-    min-width: 3.1rem;
-    padding-inline: 0.65rem;
-  }
-
-  .constellation-node-large {
-    height: 4.1rem;
-    min-width: 4.1rem;
-    padding-inline: 0.65rem;
-  }
-}
-
-@keyframes signal-flow {
-  to {
-    stroke-dashoffset: -28;
-  }
-}
-
-@keyframes signal-node-pulse {
-  0%,
-  100% {
-    opacity: 0.42;
-    scale: 0.8;
-  }
-  50% {
-    opacity: 1;
-    scale: 1.18;
-  }
+.career-chart-tick {
+  position: absolute;
+  /* Ticks only fade, so their stagger lives on opacity — they sweep in
+     left-to-right instead of blinking on together. */
+  transition: opacity 0.3s ease var(--stagger, 0ms);
 }
