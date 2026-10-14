@@ -1,80 +1,81 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, Briefcase, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { experiences } from "@/lib/data";
 
 export function Experience() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section id="experience" className="py-24 px-6">
-      <div className="mx-auto max-w-5xl">
-        <SectionHeading>Where I&apos;ve Worked</SectionHeading>
-        <motion.div className="mt-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <Tabs
-            defaultValue="0"
-            orientation="vertical"
-            className="flex flex-col gap-8 md:flex-row"
-          >
-            <TabsList className="flex h-auto w-full flex-col gap-2 overflow-hidden bg-transparent p-0 md:w-52 md:shrink-0 md:items-stretch">
-              {experiences.map((exp, i) => (
-                <TabsTrigger
-                  key={i}
-                  value={String(i)}
-                  className="shrink-0 justify-start whitespace-nowrap rounded-lg px-4 py-3 text-left text-base text-muted-foreground after:hidden hover:bg-muted hover:text-foreground data-active:bg-ktm-500 data-active:text-white data-active:shadow-md dark:hover:bg-muted dark:data-active:bg-ktm-500 dark:data-active:text-white"
-                >
-                  {exp.company}
-                  {i === 0 && " (Current)"}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+    <section id="experience" className="py-28">
+      <div>
+        <SectionHeading index="02 / EXPERIENCE">Where I&apos;ve built.</SectionHeading>
+        <div className="relative mt-14 pl-8 sm:pl-12">
+          <div aria-hidden="true" className="absolute bottom-0 left-[0.42rem] top-3 w-px bg-border sm:left-[0.65rem]" />
+          <motion.div
+            aria-hidden="true"
+            className="absolute left-[0.42rem] top-3 w-px origin-top bg-acid-500 sm:left-[0.65rem]"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: reduceMotion ? 0.01 : 1.4, ease: "easeOut" }}
+            style={{ height: "calc(100% - 0.75rem)" }}
+          />
 
-            <div className="min-w-0 flex-1">
-              {experiences.map((exp, i) => (
-                <TabsContent key={i} value={String(i)} className="mt-0">
-                  <div className="space-y-5">
-                    <div>
-                      <h3 className="text-xl font-semibold">
-                        {exp.role}{" "}
-                        <span className="text-ktm-600 dark:text-ktm-400">
-                          @ {exp.company}
-                        </span>
-                      </h3>
-                      <p className="mt-1 flex items-center gap-2 text-base text-muted-foreground">
-                        <Briefcase className="h-4 w-4" />
-                        {exp.period}
-                        {exp.location && ` · ${exp.location}`}
+          <div className="space-y-14">
+            {experiences.map((experience, index) => {
+              const isCurrent = /present/i.test(experience.period);
+              return (
+
+              <motion.article
+                key={`${experience.company}-${experience.role}`}
+                className="relative"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.18 }}
+                transition={{ duration: 0.55, delay: reduceMotion ? 0 : index * 0.08 }}
+              >
+                <span aria-hidden="true" className="absolute left-[calc(-1.58rem-7.5px)] top-1 flex h-4 w-4 items-center justify-center rounded-full border border-acid-500 bg-background shadow-[0_0_0_5px_var(--background)] sm:left-[calc(-2.35rem-7.5px)]">
+                  <span className={`h-1.5 w-1.5 rounded-full bg-acid-500 ${isCurrent ? "animate-pulse" : ""}`} />
+                </span>
+
+                <div className="grid gap-7 border-b border-border pb-14 lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-12">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <p className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-acid-600 dark:text-acid-400">
+                        {String(experiences.length - index).padStart(2, "0")} / {experience.period}
                       </p>
+                      {isCurrent && <span className="rounded-full border border-acid-500/50 bg-acid-500/10 px-2 py-1 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-acid-600 dark:text-acid-400">Current signal</span>}
                     </div>
-
-                    <ul className="space-y-4">
-                      {exp.bullets.map((bullet, j) => (
-                        <li
-                          key={j}
-                          className="relative pl-6 text-base leading-relaxed text-muted-foreground before:absolute before:left-0 before:top-[0.6rem] before:h-1.5 before:w-1.5 before:rounded-full before:bg-ktm-500"
-                        >
+                    <h3 className="font-display mt-4 text-2xl font-semibold tracking-[-0.018em] sm:text-4xl">
+                      {experience.role} <span className="text-muted-foreground">at</span> {experience.company}
+                    </h3>
+                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground sm:text-base">
+                      <span className="flex items-center gap-2"><Briefcase className="h-4 w-4 text-acid-600 dark:text-acid-400" /> {experience.focus}</span>
+                      {experience.location && <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-acid-600 dark:text-acid-400" /> {experience.location}</span>}
+                    </div>
+                    <ul className="mt-7 grid gap-4">
+                      {experience.bullets.map((bullet) => (
+                        <li key={bullet} className="relative max-w-3xl pl-5 text-base leading-relaxed text-muted-foreground before:absolute before:left-0 before:top-[0.68rem] before:h-1.5 before:w-1.5 before:rounded-full before:bg-acid-500">
                           {bullet}
                         </li>
                       ))}
                     </ul>
                   </div>
-                </TabsContent>
-              ))}
-            </div>
-          </Tabs>
-        </motion.div>
+
+                  <aside className="self-start border-l border-acid-500/40 pl-4 lg:mt-10">
+                    <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-acid-600 dark:text-acid-400">Impact signal</p>
+                    <p className="mt-3 text-lg leading-snug text-foreground">{experience.impact}</p>
+                    <ArrowUpRight className="mt-4 h-4 w-4 text-acid-600 dark:text-acid-400" />
+                  </aside>
+                </div>
+              </motion.article>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

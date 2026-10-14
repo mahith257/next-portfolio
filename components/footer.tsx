@@ -1,3 +1,5 @@
+import { CurrentYear } from "@/components/current-year";
+
 export function Footer() {
   return (
     <footer className="border-t py-8 px-6">
@@ -8,7 +10,7 @@ export function Footer() {
             href="https://nextjs.org"
             target="_blank"
             rel="noreferrer"
-            className="font-medium text-foreground transition-colors hover:text-ktm-600 dark:hover:text-ktm-400"
+            className="font-medium text-foreground transition-colors hover:text-acid-600 dark:hover:text-acid-400"
           >
             Next.js
           </a>
@@ -17,7 +19,7 @@ export function Footer() {
             href="https://tailwindcss.com"
             target="_blank"
             rel="noreferrer"
-            className="font-medium text-foreground transition-colors hover:text-ktm-600 dark:hover:text-ktm-400"
+            className="font-medium text-foreground transition-colors hover:text-acid-600 dark:hover:text-acid-400"
           >
             Tailwind CSS
           </a>
@@ -26,12 +28,12 @@ export function Footer() {
             href="https://ui.shadcn.com"
             target="_blank"
             rel="noreferrer"
-            className="font-medium text-foreground transition-colors hover:text-ktm-600 dark:hover:text-ktm-400"
+            className="font-medium text-foreground transition-colors hover:text-acid-600 dark:hover:text-acid-400"
           >
             shadcn/ui
           </a>
         </p>
-        <p>&copy; {new Date().getFullYear()} Sai Mahith Reddy Bekkem</p>
+        <p>&copy; <CurrentYear /> Sai Mahith Reddy Bekkem</p>
       </div>
     </footer>
   );

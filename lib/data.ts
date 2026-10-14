@@ -3,12 +3,16 @@ export interface Experience {
   role: string;
   period: string;
   location: string;
+  /** Short label for the kind of work, shown beside the location. */
+  focus: string;
+  impact: string;
   bullets: string[];
 }
 
 export interface Project {
   title: string;
   description: string;
+  outcome: string;
   techStack: string[];
   image: string;
   liveUrl: string;
@@ -23,8 +27,10 @@ export interface SkillCategory {
 export const personalInfo = {
   name: "Sai Mahith Reddy Bekkem",
   shortName: "Mahith",
-  title: "Senior Frontend Engineer",
-  bio: "Senior Frontend Engineer with 5 years of experience architecting and scaling React and Next.js applications. Expertise in performance optimization, component architecture, data visualization, cross-functional collaboration, and mentoring peers through code reviews.",
+  title: "Senior Full Stack Engineer",
+  /** The one-line positioning reused by the hero eyebrow and the bio. */
+  positioning: "Full-stack engineer · Frontend-first",
+  bio: "Full-stack engineer, frontend-first, with 5+ years of experience architecting and scaling React and Next.js applications and the APIs and data layers behind them. Expertise in performance optimization, component architecture, data visualization, cross-functional collaboration, and mentoring peers through code reviews.",
   email: "mahith.reddy.sai@gmail.com",
   phone: "+91 7989910999",
   github: "https://github.com/mahith257",
@@ -80,9 +86,12 @@ export const experiences: Experience[] = [
     role: "SDE 2",
     period: "Apr 2025 – Present",
     location: "Bangalore, Karnataka",
+    focus: "Product & platform UI",
+    impact: "5+ product and admin tools shaped from the interface layer outward.",
     bullets: [
       "Spearheaded UI development for 5+ customer-facing and internal admin tools, architecting a web application from scratch with secure authentication, Role-Based Access Control, and CMS features, resulting in enhanced operational efficiency and SEO performance.",
       "Built high-performance Infinite List component using react-window with virtualization, reducing initial load time by 40% and improving user engagement through optimized rendering.",
+      "Built a reusable design system leveraging MUI primitives with standardized theming, tokens, and accessible component variants, reducing UI development effort by 30% and cutting design-related regressions across products.",
       "Deployed micro frontend for user management, decoupling it from the legacy monolithic architecture, enabling independent deployments, cutting regression bugs by 30% and reducing release cycles from 2 weeks to 3 days.",
     ],
   },
@@ -91,6 +100,8 @@ export const experiences: Experience[] = [
     role: "Software Engineer",
     period: "Oct 2022 – Mar 2025",
     location: "Bangalore, Karnataka",
+    focus: "Data-driven product engineering",
+    impact: "60% longer average sessions through resilient data experiences.",
     bullets: [
       "Engineered efficient API data management using GraphQL + Apollo Client and REST + React Query, implementing intelligent caching mechanisms to increase average user session duration by 60%.",
       "Integrated 5+ data visualization libraries, building reusable components for charts, maps, and data tables, improving user data comprehension by 50% and enhancing product interactivity.",
@@ -102,6 +113,8 @@ export const experiences: Experience[] = [
     role: "Software Engineer",
     period: "Jul 2021 – Sep 2022",
     location: "",
+    focus: "Frontend engineering",
+    impact: "A reusable React foundation that increased engagement by 20%.",
     bullets: [
       "Developed high-performance React applications optimizing rendering and responsiveness, resulting in a 20% increase in user engagement across core products.",
       "Created 10+ reusable custom React hooks and implemented scalable state management using Context API, reducing state-related bugs by 30% and improving code maintainability.",
@@ -112,6 +125,8 @@ export const experiences: Experience[] = [
     role: "Software Engineer Intern",
     period: "Jul 2020 – Dec 2020",
     location: "",
+    focus: "Computer vision data",
+    impact: "1,000+ road images prepared for lane-detection model training.",
     bullets: [
       "Processed 1000+ road images for lane detection datasets using Python, OpenCV, and NumPy, directly supporting model training pipelines.",
     ],
@@ -121,6 +136,8 @@ export const experiences: Experience[] = [
     role: "Intern",
     period: "Jun 2019 – Aug 2019",
     location: "",
+    focus: "Internal web portal",
+    impact: "An employee suggestion portal made practical for an internal audience.",
     bullets: [
       "Developed an online portal for Srujani, an internal suggestion system for the employees of RSP.",
       "Tech Stack: ASP.NET, C#, JavaScript, CSS, and Oracle DB.",
@@ -133,6 +150,7 @@ export const projects: Project[] = [
     title: "Binge Watch",
     description:
       "Movie discovery platform with advanced search, genre filtering, and responsive UI. Implements debounced search to reduce API calls by 60%. Built with Material UI components including Modal, Carousel, Pagination, and Tabs.",
+    outcome: "A faster path from intent to a film worth watching, with 60% fewer search requests.",
     techStack: ["React", "Material UI", "REST APIs", "Axios"],
     image: "/projects/bingewatch.png",
     liveUrl: "https://effortless-sundae-039cea.netlify.app/",
@@ -142,6 +160,7 @@ export const projects: Project[] = [
     title: "Project Buzz",
     description:
       "Project management tool with task creation, user assignment, and collaborative workflows. Features real-time updates, comment system, and project filtering by category.",
+    outcome: "A collaborative workspace that keeps tasks, people, and progress in one clear flow.",
     techStack: ["React", "Firebase", "Firestore", "Context API"],
     image: "/projects/projectbuzz.png",
     liveUrl: "https://projectbuzz-9eb40.web.app/",
@@ -151,6 +170,7 @@ export const projects: Project[] = [
     title: "Wordle Clone",
     description:
       "Recreation of the popular word-guessing game. Guess the correct five-letter word within six attempts with color-coded feedback for each guess.",
+    outcome: "A focused game loop with immediate, color-led feedback for every move.",
     techStack: ["React", "CSS", "Game Logic"],
     image: "/projects/wordleclone.png",
     liveUrl: "https://amazing-klepon-d2d3d6.netlify.app/",
@@ -160,6 +180,7 @@ export const projects: Project[] = [
     title: "Gmail Clone",
     description:
       "A clone resembling Gmail built with React and Redux for state management. Uses Firebase for backend services and authentication.",
+    outcome: "A familiar, stateful mail experience rebuilt as a responsive React product.",
     techStack: ["React", "Redux", "Firebase"],
     image: "/projects/gmailclone.png",
     liveUrl: "https://clone-14161.web.app/",
@@ -169,6 +190,7 @@ export const projects: Project[] = [
     title: "Flipping Cards",
     description:
       "A card-matching memory game. Match pairs of cards while the game records the number of turns taken for completion.",
+    outcome: "A compact interaction study where every reveal and match feels deliberate.",
     techStack: ["React", "CSS Animations"],
     image: "/projects/flippingcards.png",
     liveUrl: "https://tranquil-cupcake-674834.netlify.app/",

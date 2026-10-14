@@ -1,56 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
+/**
+ * Washed ground: a faint acid-lime bloom plus grain so the page reads as
+ * material rather than a flat hex value. Sits behind everything at -z-10, so the
+ * grain never sits on top of content.
+ */
 export function AnimatedBackground() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const spotlightY = scrollY * 0.3;
-
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* Grid lines */}
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(72rem_circle_at_78%_14%,color-mix(in_oklch,var(--color-acid-500)_7%,transparent),transparent_62%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(56rem_circle_at_12%_88%,color-mix(in_oklch,var(--foreground)_5%,transparent),transparent_60%)]" />
       <div
-        className="absolute inset-0 opacity-[0.08] dark:opacity-[0.15]"
+        className="absolute inset-0 opacity-[0.055] mix-blend-multiply dark:opacity-[0.09] dark:mix-blend-screen"
         style={{
-          backgroundImage: `linear-gradient(var(--foreground) 1px, transparent 1px),
-                            linear-gradient(90deg, var(--foreground) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
-
-      {/* Orange spotlight that follows scroll */}
-      <div
-        className="absolute left-1/2 h-[600px] w-[800px] -translate-x-1/2 rounded-full transition-transform duration-700 ease-out"
-        style={{
-          transform: `translate(-50%, ${spotlightY}px)`,
-          background:
-            "radial-gradient(ellipse at center, var(--color-ktm-500) 0%, transparent 70%)",
-          opacity: 0.08,
-          filter: "blur(80px)",
-        }}
-      />
-
-      {/* Secondary smaller spotlight offset */}
-      <div
-        className="absolute right-0 h-[400px] w-[400px] rounded-full transition-transform duration-1000 ease-out"
-        style={{
-          transform: `translateY(${spotlightY * 1.5 + 300}px)`,
-          background:
-            "radial-gradient(ellipse at center, var(--color-ktm-400) 0%, transparent 70%)",
-          opacity: 0.06,
-          filter: "blur(60px)",
-        }}
-      />
-
-      {/* Edge fade so grid doesn't end abruptly */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_40%,var(--background)_100%)]" />
     </div>
   );
 }
